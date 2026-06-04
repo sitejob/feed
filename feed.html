@@ -277,29 +277,26 @@ body::before{
 /* ── LOCALIZAÇÃO ── */
 .loc-section{ padding:clamp(32px,5vw,56px) var(--pad); border-bottom:1px solid var(--border); }
 .loc-card{ border:1px solid var(--border); background:var(--surface); overflow:hidden; position:relative; }
-.loc-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right,var(--accent),transparent 60%); }
+.loc-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right,rgb(0,183,255),transparent 60%); }
 .loc-card.inactive::before{ background:linear-gradient(to right,var(--muted),transparent 60%); opacity:.3; }
 .loc-inner{ padding:clamp(20px,3.5vw,36px) clamp(20px,4vw,40px); }
 .loc-status-row{ display:flex; align-items:center; gap:10px; margin-bottom:clamp(16px,2.5vw,24px); }
-.loc-dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0; animation:locdot 2.4s ease-in-out infinite; }
+.loc-dot{ width:8px; height:8px; border-radius:50%; background:rgb(0,183,255); flex-shrink:0; animation:locdot 2.4s ease-in-out infinite; }
 .loc-dot.off{ background:var(--muted); animation:none; opacity:.4; }
 @keyframes locdot{ 0%,100%{box-shadow:0 0 0 0 rgba(184,160,122,0)} 50%{box-shadow:0 0 0 5px rgba(184,160,122,.18)} }
-.loc-status-label{ font-family:var(--mono); font-size:.54rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent); }
+.loc-status-label{ font-family:var(--mono); font-size:.54rem; letter-spacing:3px; text-transform:uppercase; color:white; }
 .loc-status-label.off{ color:var(--muted); }
 .loc-place{ font-family:var(--serif); font-size:clamp(1.6rem,4.5vw,2.8rem); font-weight:400; line-height:1; color:var(--white); margin-bottom:6px; letter-spacing:-.5px; }
 .loc-card.inactive .loc-place{ color:var(--muted); opacity:.4; }
-.loc-detail{ font-family:var(--mono); font-size:.6rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:clamp(18px,3vw,28px); }
+.loc-detail{ font-family:var(--mono); font-size:.6rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); }
 .loc-card.inactive .loc-detail{ opacity:.3; }
-.loc-rule{ height:1px; background:var(--border); margin-bottom:clamp(18px,3vw,28px); }
-.loc-msg{ font-family:var(--serif); font-style:italic; font-size:clamp(.95rem,2.2vw,1.15rem); color:var(--text); line-height:1.65; max-width:560px; margin-bottom:clamp(14px,2vw,20px); }
-.loc-msg strong{ font-style:normal; font-weight:500; color:var(--white); }
+.loc-meta-row{ display:flex; align-items:center; gap:clamp(20px,4vw,40px); flex-wrap:wrap; }
+.loc-meta-label{ font-family:var(--mono); font-size:.5rem; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+.loc-meta-value{ font-family:var(--serif); font-size:clamp(1rem,2.2vw,1.25rem); color:var(--text); }
 .loc-offline-msg{ font-family:var(--serif); font-style:italic; font-size:clamp(.95rem,2.2vw,1.15rem); color:var(--muted); line-height:1.65; max-width:520px; margin-bottom:clamp(14px,2vw,20px); }
 .loc-notice{ display:flex; align-items:flex-start; gap:10px; background:rgba(184,160,122,.05); border:1px solid rgba(184,160,122,.1); padding:12px 16px; max-width:560px; }
 .loc-notice-icon{ font-size:.8rem; flex-shrink:0; margin-top:1px; opacity:.6; }
 .loc-notice-text{ font-family:var(--mono); font-size:.54rem; letter-spacing:1.5px; line-height:1.7; color:var(--muted); }
-.loc-meta-row{ display:flex; align-items:center; gap:clamp(20px,4vw,40px); flex-wrap:wrap; margin-top:clamp(18px,3vw,28px); padding-top:clamp(14px,2vw,20px); border-top:1px solid var(--border2); }
-.loc-meta-label{ font-family:var(--mono); font-size:.5rem; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
-.loc-meta-value{ font-family:var(--serif); font-size:clamp(1rem,2.2vw,1.25rem); color:var(--text); }
 
 /* ── GALLERY ── */
 .gallery-section{ padding:clamp(32px,5vw,56px) var(--pad) 100px; }
@@ -321,7 +318,7 @@ body::before{
 .gi-vid{ position:absolute; bottom:8px; right:8px; font-family:var(--mono); font-size:.5rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); background:rgba(11,11,14,.8); padding:3px 8px; pointer-events:none; }
 
 /* ═══════════════════════════════════════════════════
-   TINHOLIST — PLAYLIST BANNER (novo)
+   TINHOLIST — PLAYLIST BANNER
    ═══════════════════════════════════════════════════ */
 .tinholist-wrap{
   width:100%;
@@ -331,16 +328,12 @@ body::before{
   position:relative;
   overflow:hidden;
 }
-
-/* faixa verde spotify no topo */
 .tinholist-wrap::before{
   content:'';
   position:absolute; top:0; left:0; right:0; height:1px;
   background:linear-gradient(to right, transparent 0%, var(--green) 30%, var(--green) 70%, transparent 100%);
   opacity:.35;
 }
-
-/* feixe de luz */
 .tl-beam{
   position:absolute; top:0; bottom:0; width:50%;
   background:linear-gradient(to right, transparent, rgba(29,185,84,.04), transparent);
@@ -348,8 +341,6 @@ body::before{
   pointer-events:none; z-index:0;
 }
 @keyframes tlbeam{ 0%{left:-55%} 100%{left:120%} }
-
-/* bloco superior: identidade da playlist */
 .tl-header{
   position:relative; z-index:1;
   display:flex; align-items:center; justify-content:space-between;
@@ -358,19 +349,15 @@ body::before{
   gap:clamp(12px,3vw,32px);
   flex-wrap:wrap;
 }
-
 .tl-left{
   display:flex; align-items:center; gap:clamp(12px,2vw,22px);
   flex:1; min-width:0;
 }
-
-/* ícone spotify */
 .tl-spotify-icon{
   width:clamp(32px,4vw,44px); height:clamp(32px,4vw,44px);
   flex-shrink:0; opacity:.85;
 }
 .tl-spotify-icon svg{ width:100%; height:100%; }
-
 .tl-identity{ min-width:0; }
 .tl-label{
   font-family:var(--mono); font-size:.48rem; letter-spacing:3px; text-transform:uppercase;
@@ -382,29 +369,19 @@ body::before{
   animation:tldot 2.4s ease-in-out infinite;
 }
 @keyframes tldot{ 0%,100%{opacity:.4;transform:scale(.7)} 50%{opacity:1;transform:scale(1.2)} }
-
 .tl-name{
   font-family:var(--serif); font-size:clamp(1.3rem,3.5vw,2rem);
   font-weight:400; letter-spacing:-.5px; line-height:1;
   color:var(--white); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
-.tl-name em{
-  font-style:italic; color:var(--green);
-}
-
-.tl-right{
-  display:flex; align-items:center; gap:12px; flex-shrink:0;
-}
-
-/* contador de gêneros */
+.tl-name em{ font-style:italic; color:var(--green); }
+.tl-right{ display:flex; align-items:center; gap:12px; flex-shrink:0; }
 .tl-genres-count{
   font-family:var(--mono); font-size:.5rem; letter-spacing:2.5px; text-transform:uppercase;
   color:var(--muted); border:1px solid var(--border); padding:6px 12px;
   white-space:nowrap;
 }
 @media(max-width:480px){ .tl-genres-count{ display:none; } }
-
-/* botão ouvir */
 .tl-btn{
   display:flex; align-items:center; gap:9px;
   background:var(--green); color:#000;
@@ -414,60 +391,39 @@ body::before{
   white-space:nowrap; flex-shrink:0;
 }
 .tl-btn:hover{ background:#1ed760; transform:scale(1.03); }
-.tl-btn-play{
-  width:14px; height:14px; flex-shrink:0;
-}
+.tl-btn-play{ width:14px; height:14px; flex-shrink:0; }
 .tl-btn-play svg{ width:100%; height:100%; }
-
-/* bloco inferior: ticker dos artistas */
 .tl-ticker{
   position:relative; z-index:1;
   display:flex; align-items:center;
   height:clamp(38px,5vw,48px);
   overflow:hidden;
 }
-
 .tl-ticker-label{
   font-family:var(--mono); font-size:.46rem; letter-spacing:3px; text-transform:uppercase;
   color:var(--muted); padding:0 clamp(14px,2vw,22px) 0 var(--pad);
   white-space:nowrap; flex-shrink:0; opacity:.6;
   border-right:1px solid var(--border); margin-right:0;
 }
-
 .tl-ticker-mask{
   flex:1; overflow:hidden; height:100%;
   display:flex; align-items:center;
   mask-image:linear-gradient(to right, transparent 0%, black 4%, black 94%, transparent 100%);
   -webkit-mask-image:linear-gradient(to right, transparent 0%, black 4%, black 94%, transparent 100%);
 }
-
 .tl-ticker-strip{
   display:flex; align-items:center;
   animation:tltick 28s linear infinite;
   white-space:nowrap; will-change:transform;
 }
 @keyframes tltick{ 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-
-.tl-item{
-  display:inline-flex; align-items:center; gap:9px;
-  padding:0 clamp(20px,3vw,36px);
-  flex-shrink:0;
-}
-
+.tl-item{ display:inline-flex; align-items:center; gap:9px; padding:0 clamp(20px,3vw,36px); flex-shrink:0; }
 .tl-genre-pill{
   font-family:var(--mono); font-size:.44rem; letter-spacing:3px; text-transform:uppercase;
-  color:var(--green); border:1px solid rgba(29,185,84,.22); padding:3px 8px;
-  flex-shrink:0;
+  color:var(--green); border:1px solid rgba(29,185,84,.22); padding:3px 8px; flex-shrink:0;
 }
-
-.tl-artist{
-  font-family:var(--serif); font-size:clamp(.9rem,2vw,1.05rem);
-  color:var(--text); letter-spacing:-.1px;
-}
-
-.tl-sep{
-  font-family:var(--mono); font-size:.5rem; color:var(--muted); opacity:.3; padding:0 4px;
-}
+.tl-artist{ font-family:var(--serif); font-size:clamp(.9rem,2vw,1.05rem); color:var(--text); letter-spacing:-.1px; }
+.tl-sep{ font-family:var(--mono); font-size:.5rem; color:var(--muted); opacity:.3; padding:0 4px; }
 
 /* ── AD MINIMALISTA ── */
 .mini-ad{ border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:0 var(--pad); background:var(--bg); overflow:hidden; position:relative; }
@@ -523,23 +479,17 @@ body::before{
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     TINHOLIST — PLAYLIST BANNER
-     ═══════════════════════════════════════════════════ -->
+<!-- TINHOLIST — PLAYLIST BANNER -->
 <div class="tinholist-wrap">
   <div class="tl-beam"></div>
-
-  <!-- HEADER: identidade + botão -->
   <div class="tl-header">
     <div class="tl-left">
-      <!-- Ícone Spotify SVG inline -->
       <div class="tl-spotify-icon">
         <svg viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="84" cy="84" r="84" fill="#1DB954"/>
           <path d="M120.8 116.8c-1.6 0-2.6-.5-3.9-1.3-14.1-8.6-31.9-13.1-50.3-13.1-10.4 0-20.9 1.5-30.5 3.9-1.3.3-3 .9-4.3.9-3.5 0-5.9-2.7-5.9-6 0-3.8 2.4-5.7 5.4-6.5 11.4-3 22.8-4.7 35.5-4.7 21.2 0 41.2 5.3 57.4 15.4 2.3 1.3 3.8 3 3.8 6.1.1 3.4-2.6 6.3-7.2 6.3zm8.5-25c-2 0-3.4-.7-4.8-1.5C109 81.4 88.8 75.7 65.2 75.7c-10.9 0-20.7 1.6-28.5 3.8-1.6.5-2.6.9-4.3.9-4.3 0-7.5-3.3-7.5-7.5 0-4.3 2.4-6.9 6.2-8 9.9-2.9 20.6-4.6 34.4-4.6 25.5 0 49.4 6.7 68.6 18.8 2.8 1.7 4.4 3.9 4.4 7.6.1 4.2-3.3 7.6-9.2 7.6zm9.6-28.7c-2 0-3.2-.5-4.8-1.5-17.8-10.8-45.1-16.6-71.4-16.6-13 0-25.6 1.5-36.5 4.5-1.5.4-3.2 1-5.1 1-5.2 0-9-4.1-9-9.2 0-5.2 3-8.2 7.3-9.4 12.5-3.7 27.3-5.5 43.4-5.5 28.8 0 59 6.6 81.2 19.3 3.5 2 5.4 4.7 5.4 8.9.1 5.2-4 8.5-10.5 8.5z" fill="#fff"/>
         </svg>
       </div>
-
       <div class="tl-identity">
         <div class="tl-label">
           <span class="tl-label-dot"></span>
@@ -548,10 +498,9 @@ body::before{
         <div class="tl-name"><em>TinhoList</em></div>
       </div>
     </div>
-
     <div class="tl-right">
       <span class="tl-genres-count"></span>
-      <a href="https://open.spotify.com/playlist/SUA_PLAYLIST" target="_blank" class="tl-btn">
+      <a href="https://open.spotify.com/playlist/3SdsinysCR4XP30WbfTGJN?si=NCd1HbTNQfutyNqXMWzOQg" target="_blank" class="tl-btn">
         <span class="tl-btn-play">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 4l14 8-14 8V4z" fill="currentColor"/>
@@ -561,8 +510,6 @@ body::before{
       </a>
     </div>
   </div>
-
-  <!-- TICKER: artistas em scroll -->
   <div class="tl-ticker">
     <span class="tl-ticker-label">na playlist</span>
     <div class="tl-ticker-mask">
@@ -650,7 +597,7 @@ const PROFILE = {
   name:   "Vitor Pereira",
   nameEm: "",
   handle: "@tinho",
-  bio:    "vulgo TinHo.",
+  bio:    "@vitorpereirajs", 
   desde:  "2026",
 };
 
@@ -665,50 +612,32 @@ const STORIES = [
     dur:     6,
   },
   {
-    src:     "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80",
-    type:    "image",
-    title:   "Altitude",
-    desc:    "O silêncio tem peso lá em cima.",
-    catalog: "EXP·002",
-    expires: "",
-    dur:     6,
-  },
-  {
-    src:     "InShot_20260528_230058565.mp4",
+    src:     "InShot_20260604_135051504.mp4",
     type:    "video",
     title:   "Movimento",
     desc:    "Um instante que pediu para ser vídeo.",
-    catalog: "EXP·003",
+    catalog: "EXP·002",
     expires: "",
-    dur:     40,
-  },
-  {
-    src:     "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=900&q=80",
-    type:    "image",
-    title:   "Campo",
-    desc:    "Sem destino definido.",
-    catalog: "EXP·004",
-    expires: "2020-01-01T00:00:00",
-    dur:     6,
+    dur:     15,
   },
 ];
 
 const LOCALIZACAO = {
-  ativo:   false,
-  lugar:   "Lagoa da Conceição",
-  detalhe: "Florianópolis · SC · Brasil",
-  horario: "Das 14h às 20h",
-  data:    "Hoje, 26 mai",
-  msg:     "Estou por aqui hoje — se quiser passar e dar um abraço, será muito bem-vindo. É um lugar bonito e vale a visita.",
+  ativo:   true,
+  lugar:   "Palhocinha de meu deus",
+  detalhe: "· SC · Brasil",
+  horario: "...",
+  data:    "...",
+  msg:     "",
 };
 
 const POSTS = [
-  { src:"6JL2.gif",            type:"image", caption:"...",                                       date:"2025", span:2 },
-  { src:"20250315_181803.jpg", type:"image", caption:"PRAIA DE ITAPIRUBA.",                       date:"2025", span:1 },
-  { src:"20250730_174115.jpg", type:"image", caption:"PÔR DO SOL EM SANTO AMARO DA IMPERATRIZ.", date:"2025", span:1 },
-  { src:"20250722_180845.jpg", type:"image", caption:"PÕR DO SOL EM IMBITUBA.",                  date:"2025", span:1 },
-  { src:"20250722_161453.jpg", type:"image", caption:"INÍCIO DE TARDE EM IMBITUBA.",             date:"2025", span:1 },
-  { src:"",                    type:"image", caption:"FOGOOOOO.",                                 date:"2024", span:2 },
+  { src:"InShot_20260604_145000755.jpg",  type:"image", caption:"GUARDA DO EMBAU",                                       date:"2025", span:2 },
+  { src:"20250315_181803.jpg",            type:"image", caption:"PRAIA DE ITAPIRUBA.",                                   date:"2025", span:1 },
+  { src:"20250730_174115.jpg",            type:"image", caption:"PÔR DO SOL EM SANTO AMARO DA IMPERATRIZ.",             date:"2025", span:1 },
+  { src:"20250722_180845.jpg",            type:"image", caption:"PÕR DO SOL EM IMBITUBA.",                              date:"2025", span:1 },
+  { src:"20250722_161453.jpg",            type:"image", caption:"INÍCIO DE TARDE EM IMBITUBA.",                         date:"2025", span:1 },
+  { src:"InShot_20260604_145112062.jpg",  type:"image", caption:"ENSEADA DE BRITO",                                     date:"2025", span:2 },
 ];
 
 /* Artistas do ticker TinhoList */
@@ -848,11 +777,9 @@ STORIES.forEach(function(s,i){
     sec.innerHTML=heading+
       '<div class="loc-card"><div class="loc-inner">'+
         '<div class="loc-status-row"><div class="loc-dot"></div><span class="loc-status-label">estou aqui agora</span></div>'+
-        '<div class="loc-place">'+L.lugar+'</div><div class="loc-detail">'+L.detalhe+'</div>'+
-        '<div class="loc-rule"></div>'+
-        '<p class="loc-msg">'+L.msg+'<br><br><strong>Ser\u00e1 um prazer te ver por aqui.</strong> Se quiser vir, manda uma mensagem antes \u2014 assim posso te esperar e a gente se encontra com tranquilidade. \ud83e\udd1d</p>'+
-        '<div class="loc-notice"><span class="loc-notice-icon">\u21b3</span><span class="loc-notice-text">Por favor, avise com anteced\u00eancia antes de vir. Respeite o espa\u00e7o e o momento. A presen\u00e7a \u00e9 bem-vinda \u2014 o respeito tamb\u00e9m.</span></div>'+
-        '<div class="loc-meta-row">'+
+        '<div class="loc-place">'+L.lugar+'</div>'+
+        '<div class="loc-detail" style="margin-bottom:clamp(18px,3vw,28px);">'+L.detalhe+'</div>'+
+        '<div class="loc-meta-row" style="padding-top:clamp(14px,2vw,20px);border-top:1px solid var(--border2);">'+
           '<div class="loc-meta-item"><div class="loc-meta-label">hor\u00e1rio</div><div class="loc-meta-value">'+L.horario+'</div></div>'+
           '<div class="loc-meta-item"><div class="loc-meta-label">data</div><div class="loc-meta-value">'+L.data+'</div></div>'+
         '</div>'+
@@ -862,7 +789,7 @@ STORIES.forEach(function(s,i){
       '<div class="loc-card inactive"><div class="loc-inner">'+
         '<div class="loc-status-row"><div class="loc-dot off"></div><span class="loc-status-label off">localiza\u00e7\u00e3o inativa</span></div>'+
         '<div class="loc-place">\u2014</div><div class="loc-detail">nenhum local compartilhado no momento</div>'+
-        '<div class="loc-rule"></div>'+
+        '<div style="height:1px;background:var(--border);margin:clamp(18px,3vw,28px) 0;"></div>'+
         '<p class="loc-offline-msg">Quando estiver em algum lugar aberto \u00e0 visita, compartilharei aqui \u2014 com local, hor\u00e1rio e uma mensagem para quem quiser vir.</p>'+
         '<div class="loc-notice"><span class="loc-notice-icon">\u21b3</span><span class="loc-notice-text">Mesmo quando a localiza\u00e7\u00e3o estiver ativa, pe\u00e7o que avise com anteced\u00eancia. Respeitar o espa\u00e7o e o momento faz toda a diferen\u00e7a.</span></div>'+
       '</div></div>';
