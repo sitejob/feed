@@ -21,6 +21,7 @@
   --sans:    'Figtree', sans-serif;
   --pad:     clamp(20px, 5vw, 72px);
   --green:   #1DB954;
+  --vp:      #00b7ff;
 }
 html{ scroll-behavior:smooth; }
 body{
@@ -513,97 +514,118 @@ body::before{
 }
 
 /* ═══════════════════════════════════════════════════
-   ADS SECTION — faixa de anúncios
+   PARCEIROS — barra estilo Mercado Play
    ═══════════════════════════════════════════════════ */
-.ads-section{
+.parceiros-section{
   border-top:1px solid var(--border);
   border-bottom:1px solid var(--border);
-  background:var(--bg);
-  padding:clamp(22px,3.5vw,36px) var(--pad);
-  position:relative; overflow:hidden;
+  background:var(--surface);
+  position:relative;
+  overflow:hidden;
 }
-.ads-section::before{
-  content:''; position:absolute; top:0; left:0; right:0; height:1px;
-  background:linear-gradient(to right,transparent,rgba(184,160,122,.14),transparent);
-}
-.ads-heading{
-  display:flex; align-items:center; gap:14px; margin-bottom:clamp(16px,2.5vw,24px);
-}
-.ads-heading-label{
-  font-family:var(--mono); font-size:.46rem; letter-spacing:4px; text-transform:uppercase;
-  color:var(--muted); opacity:.45; flex-shrink:0;
-}
-.ads-heading-rule{ flex:1; height:1px; background:var(--border); }
 
-.ads-track{
-  position:relative; overflow:hidden;
+/* linha de luz superior */
+.parceiros-section::before{
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:1.5px;
+  background:linear-gradient(to right,
+    transparent 0%,
+    var(--green) 20%,
+    var(--vp) 50%,
+    var(--green) 80%,
+    transparent 100%);
+  opacity:.4;
+  animation:parcTopLine 6s ease-in-out infinite alternate;
 }
-.ads-track::before,.ads-track::after{
-  content:''; position:absolute; top:0; bottom:0; width:clamp(20px,4vw,48px); z-index:2; pointer-events:none;
-}
-.ads-track::before{ left:0;  background:linear-gradient(to right, var(--bg), transparent); }
-.ads-track::after  { right:0; background:linear-gradient(to left,  var(--bg), transparent); }
+@keyframes parcTopLine{ from{opacity:.25} to{opacity:.55} }
 
-.ads-slider{
-  display:flex; gap:10px;
-  animation:adsTick 26s linear infinite;
+/* rail label fixo à esquerda */
+.parceiros-rail{
+  display:flex;
+  align-items:stretch;
+  height:clamp(60px,9vw,80px);
+  overflow:hidden;
+  position:relative;
+}
+.parceiros-rail::before,
+.parceiros-rail::after{
+  content:''; position:absolute; top:0; bottom:0; width:clamp(24px,5vw,60px); z-index:2; pointer-events:none;
+}
+.parceiros-rail::before{ left:0;  background:linear-gradient(to right, var(--surface), transparent); }
+.parceiros-rail::after { right:0; background:linear-gradient(to left,  var(--surface), transparent); }
+
+.parceiros-label{
+  display:flex; align-items:center;
+  flex-shrink:0;
+  padding:0 clamp(16px,2.5vw,28px) 0 var(--pad);
+  border-right:1px solid var(--border);
+  font-family:var(--mono); font-size:.46rem; letter-spacing:3.5px;
+  text-transform:uppercase; color:var(--muted); opacity:.55;
+  white-space:nowrap; position:relative; z-index:3;
+  background:var(--surface);
+}
+
+/* track deslizante */
+.parceiros-track{
+  flex:1; overflow:hidden;
+  display:flex; align-items:center;
+  mask-image:linear-gradient(to right, transparent 0%, black 2%, black 96%, transparent 100%);
+  -webkit-mask-image:linear-gradient(to right, transparent 0%, black 2%, black 96%, transparent 100%);
+}
+.parceiros-strip{
+  display:flex; align-items:center;
+  gap:0;
+  animation:parcSlide 38s linear infinite;
   will-change:transform;
 }
-.ads-slider:hover{ animation-play-state:paused; }
-@keyframes adsTick{ 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.parceiros-strip:hover{ animation-play-state:paused; }
+@keyframes parcSlide{ 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
-.ad-card{
-  flex-shrink:0; width:clamp(180px,22vw,240px);
-  border:1px solid var(--border);
-  background:var(--surface);
-  padding:clamp(12px,1.5vw,16px) clamp(14px,2vw,18px);
-  position:relative; overflow:hidden;
-  display:flex; flex-direction:column; gap:7px;
-  transition:border-color .4s;
+/* card individual */
+.parc-card{
+  display:flex; align-items:center; gap:clamp(12px,2vw,18px);
+  flex-shrink:0;
+  padding:0 clamp(24px,4vw,44px);
+  border-right:1px solid var(--border2);
+  height:clamp(60px,9vw,80px);
+  position:relative;
+  cursor:default;
+  text-decoration:none;
+  transition:background .3s;
 }
-.ad-card:hover{ border-color:rgba(255,255,255,.16); }
+a.parc-card{ cursor:pointer; }
+a.parc-card:hover{ background:rgba(255,255,255,.03); }
 
-.ad-top-line{
-  position:absolute; top:0; left:0; right:0; height:1.5px;
-  transform:scaleX(0); transform-origin:left;
-  animation:adTopLine 4s ease-in-out infinite;
-  animation-delay:var(--dl,0s);
-}
-@keyframes adTopLine{
-  0%,100%{ transform:scaleX(0); }
-  30%     { transform:scaleX(1); }
-  80%     { transform:scaleX(1); }
-  95%     { transform:scaleX(0); }
-}
-
-.ad-inner-beam{
-  position:absolute; inset:0; pointer-events:none;
-  opacity:0; animation:adBeamPulse 4s ease-in-out infinite;
-  animation-delay:var(--dl,0s);
-}
-@keyframes adBeamPulse{ 0%,100%{opacity:0} 40%{opacity:1} 85%{opacity:1} 95%{opacity:0} }
-
-.ad-card-top{ display:flex; align-items:center; gap:9px; }
-.ad-logo{
-  width:26px; height:26px; border-radius:50%; flex-shrink:0;
+/* ícone/logo do parceiro */
+.parc-logo{
   display:flex; align-items:center; justify-content:center;
-  font-size:12px; font-weight:700; letter-spacing:-.5px;
+  flex-shrink:0;
+  width:clamp(28px,4vw,38px);
+  height:clamp(28px,4vw,38px);
 }
-.ad-brand{
-  font-family:var(--mono); font-size:.48rem; letter-spacing:3px; text-transform:uppercase;
-  color:var(--muted);
+.parc-logo svg{ width:100%; height:100%; }
+
+/* texto do card */
+.parc-body{ display:flex; flex-direction:column; gap:3px; }
+.parc-brand{
+  font-family:var(--mono); font-size:.44rem; letter-spacing:3px;
+  text-transform:uppercase; color:var(--muted); line-height:1;
 }
-.ad-headline{
-  font-family:var(--serif); font-size:clamp(.92rem,1.8vw,1.02rem);
-  color:var(--white); line-height:1.3;
+.parc-line{
+  font-family:var(--serif); font-size:clamp(.88rem,1.8vw,1.05rem);
+  color:var(--white); line-height:1.2; white-space:nowrap;
 }
-.ad-sub{
-  font-family:var(--mono); font-size:.46rem; letter-spacing:1.5px;
-  color:var(--muted); line-height:1.6;
-}
-.ad-badge{
-  font-family:var(--mono); font-size:.38rem; letter-spacing:2.5px; text-transform:uppercase;
-  color:var(--muted); opacity:.28; margin-top:auto; align-self:flex-end;
+.parc-line em{ font-style:italic; }
+.parc-line.green em{ color:var(--green); }
+.parc-line.blue  em{ color:var(--vp); }
+
+/* separador estético entre cards */
+.parc-sep{
+  flex-shrink:0;
+  width:1px; height:28px;
+  background:var(--border);
+  margin:0 clamp(20px,3.5vw,36px);
+  opacity:.6;
 }
 
 /* ── AD MINIMALISTA (rodapé) ── */
@@ -767,14 +789,15 @@ body::before{
 <section class="loc-section"    id="loc-section"></section>
 <section class="gallery-section" id="gallery-section"></section>
 
-<!-- ADS SECTION -->
-<div class="ads-section">
-  <div class="ads-heading">
-    <span class="ads-heading-label">parceiros</span>
-    <div class="ads-heading-rule"></div>
-  </div>
-  <div class="ads-track">
-    <div class="ads-slider" id="ads-slider"></div>
+<!-- ═══════════════════════════════════════════════════
+     PARCEIROS — barra estilo Mercado Play
+     ═══════════════════════════════════════════════════ -->
+<div class="parceiros-section">
+  <div class="parceiros-rail">
+    <span class="parceiros-label">parceiros</span>
+    <div class="parceiros-track">
+      <div class="parceiros-strip" id="parceiros-strip"></div>
+    </div>
   </div>
 </div>
 
@@ -860,67 +883,59 @@ const TINHOLIST = [
   { genre:"samba",  artist:"Seu Jorge"    },
 ];
 
-/* Anúncios rotativos */
-const ADS = [
+/* Cards da barra de parceiros */
+const PARCEIROS = [
   {
-    brand:    "spotify",
-    color:    "#1DB954",
-    beam:     "rgba(29,185,84,.05)",
-    logoColor:"#1DB954",
-    logoBg:   "rgba(29,185,84,.1)",
-    logoChar: "♪",
-    headline: "sua <em style='font-style:italic;color:#1DB954'>trilha sonora</em> para o hexa.",
-    sub:      "música pra cada momento · streaming sem limites",
+    tag:   "spotify",
+    color: "green",
+    href:  "https://open.spotify.com/playlist/3SdsinysCR4XP30WbfTGJN",
+    logo: `<svg viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="84" cy="84" r="84" fill="#1DB954"/>
+      <path d="M120.8 116.8c-1.6 0-2.6-.5-3.9-1.3-14.1-8.6-31.9-13.1-50.3-13.1-10.4 0-20.9 1.5-30.5 3.9-1.3.3-3 .9-4.3.9-3.5 0-5.9-2.7-5.9-6 0-3.8 2.4-5.7 5.4-6.5 11.4-3 22.8-4.7 35.5-4.7 21.2 0 41.2 5.3 57.4 15.4 2.3 1.3 3.8 3 3.8 6.1.1 3.4-2.6 6.3-7.2 6.3zm8.5-25c-2 0-3.4-.7-4.8-1.5C109 81.4 88.8 75.7 65.2 75.7c-10.9 0-20.7 1.6-28.5 3.8-1.6.5-2.6.9-4.3.9-4.3 0-7.5-3.3-7.5-7.5 0-4.3 2.4-6.9 6.2-8 9.9-2.9 20.6-4.6 34.4-4.6 25.5 0 49.4 6.7 68.6 18.8 2.8 1.7 4.4 3.9 4.4 7.6.1 4.2-3.3 7.6-9.2 7.6zm9.6-28.7c-2 0-3.2-.5-4.8-1.5-17.8-10.8-45.1-16.6-71.4-16.6-13 0-25.6 1.5-36.5 4.5-1.5.4-3.2 1-5.1 1-5.2 0-9-4.1-9-9.2 0-5.2 3-8.2 7.3-9.4 12.5-3.7 27.3-5.5 43.4-5.5 28.8 0 59 6.6 81.2 19.3 3.5 2 5.4 4.7 5.4 8.9.1 5.2-4 8.5-10.5 8.5z" fill="#fff"/>
+    </svg>`,
+    line: "ouça a <em>TinhoList</em> no Spotify",
   },
   {
-    brand:    "spotify",
-    color:    "#1DB954",
-    beam:     "rgba(29,185,84,.05)",
-    logoColor:"#1DB954",
-    logoBg:   "rgba(29,185,84,.1)",
-    logoChar: "♪",
-    headline: "<em style='font-style:italic;color:#1DB954'>podcasts e playlists</em> que você vai querer.",
-    sub:      "ouça o que o mundo está ouvindo agora",
+    tag:   "spotify",
+    color: "green",
+    href:  "https://open.spotify.com/playlist/3SdsinysCR4XP30WbfTGJN",
+    logo: `<svg viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="84" cy="84" r="84" fill="#1DB954"/>
+      <path d="M120.8 116.8c-1.6 0-2.6-.5-3.9-1.3-14.1-8.6-31.9-13.1-50.3-13.1-10.4 0-20.9 1.5-30.5 3.9-1.3.3-3 .9-4.3.9-3.5 0-5.9-2.7-5.9-6 0-3.8 2.4-5.7 5.4-6.5 11.4-3 22.8-4.7 35.5-4.7 21.2 0 41.2 5.3 57.4 15.4 2.3 1.3 3.8 3 3.8 6.1.1 3.4-2.6 6.3-7.2 6.3zm8.5-25c-2 0-3.4-.7-4.8-1.5C109 81.4 88.8 75.7 65.2 75.7c-10.9 0-20.7 1.6-28.5 3.8-1.6.5-2.6.9-4.3.9-4.3 0-7.5-3.3-7.5-7.5 0-4.3 2.4-6.9 6.2-8 9.9-2.9 20.6-4.6 34.4-4.6 25.5 0 49.4 6.7 68.6 18.8 2.8 1.7 4.4 3.9 4.4 7.6.1 4.2-3.3 7.6-9.2 7.6zm9.6-28.7c-2 0-3.2-.5-4.8-1.5-17.8-10.8-45.1-16.6-71.4-16.6-13 0-25.6 1.5-36.5 4.5-1.5.4-3.2 1-5.1 1-5.2 0-9-4.1-9-9.2 0-5.2 3-8.2 7.3-9.4 12.5-3.7 27.3-5.5 43.4-5.5 28.8 0 59 6.6 81.2 19.3 3.5 2 5.4 4.7 5.4 8.9.1 5.2-4 8.5-10.5 8.5z" fill="#fff"/>
+    </svg>`,
+    line: "<em>música</em> para cada momento do dia",
   },
   {
-    brand:    "amazon",
-    color:    "#FF9900",
-    beam:     "rgba(255,153,0,.05)",
-    logoColor:"#FF9900",
-    logoBg:   "rgba(255,153,0,.1)",
-    logoChar: "a",
-    headline: "entrega <em style='font-style:italic;color:#FF9900'>antes</em> do apito final.",
-    sub:      "prime · frete rápido e filmes num lugar só",
+    tag:   "vp digital",
+    color: "blue",
+    href:  "#",
+    logo: `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="40" height="40" rx="6" fill="rgba(0,183,255,0.12)"/>
+      <path d="M10 12l7 16h6l7-16h-5l-4.5 11L16 12h-6z" fill="#00b7ff"/>
+      <circle cx="30" cy="28" r="3" fill="#00b7ff" opacity=".6"/>
+    </svg>`,
+    line: "feito com <em>VP Digital</em>",
   },
   {
-    brand:    "amazon",
-    color:    "#FF9900",
-    beam:     "rgba(255,153,0,.05)",
-    logoColor:"#FF9900",
-    logoBg:   "rgba(255,153,0,.1)",
-    logoChar: "a",
-    headline: "<em style='font-style:italic;color:#FF9900'>prime video.</em> campeonatos e séries.",
-    sub:      "assista ao que quiser, quando quiser",
+    tag:   "vp digital",
+    color: "blue",
+    href:  "#",
+    logo: `<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="40" height="40" rx="6" fill="rgba(0,183,255,0.12)"/>
+      <path d="M10 12l7 16h6l7-16h-5l-4.5 11L16 12h-6z" fill="#00b7ff"/>
+      <circle cx="30" cy="28" r="3" fill="#00b7ff" opacity=".6"/>
+    </svg>`,
+    line: "sites e <em>experiências digitais</em>",
   },
   {
-    brand:    "google",
-    color:    "#4285F4",
-    beam:     "rgba(66,133,244,.05)",
-    logoColor:"#4285F4",
-    logoBg:   "rgba(66,133,244,.1)",
-    logoChar: "G",
-    headline: "<em style='font-style:italic;color:#4285F4'>busque</em> tudo que a copa deixou.",
-    sub:      "resultados, tabelas e curiosidades em tempo real",
-  },
-  {
-    brand:    "google",
-    color:    "#34A853",
-    beam:     "rgba(52,168,83,.05)",
-    logoColor:"#34A853",
-    logoBg:   "rgba(52,168,83,.1)",
-    logoChar: "G",
-    headline: "fotos, mapas <em style='font-style:italic;color:#34A853'>e memórias</em> na nuvem.",
-    sub:      "google photos · guarda o que você não quer perder",
+    tag:   "spotify",
+    color: "green",
+    href:  "https://open.spotify.com/playlist/3SdsinysCR4XP30WbfTGJN",
+    logo: `<svg viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="84" cy="84" r="84" fill="#1DB954"/>
+      <path d="M120.8 116.8c-1.6 0-2.6-.5-3.9-1.3-14.1-8.6-31.9-13.1-50.3-13.1-10.4 0-20.9 1.5-30.5 3.9-1.3.3-3 .9-4.3.9-3.5 0-5.9-2.7-5.9-6 0-3.8 2.4-5.7 5.4-6.5 11.4-3 22.8-4.7 35.5-4.7 21.2 0 41.2 5.3 57.4 15.4 2.3 1.3 3.8 3 3.8 6.1.1 3.4-2.6 6.3-7.2 6.3zm8.5-25c-2 0-3.4-.7-4.8-1.5C109 81.4 88.8 75.7 65.2 75.7c-10.9 0-20.7 1.6-28.5 3.8-1.6.5-2.6.9-4.3.9-4.3 0-7.5-3.3-7.5-7.5 0-4.3 2.4-6.9 6.2-8 9.9-2.9 20.6-4.6 34.4-4.6 25.5 0 49.4 6.7 68.6 18.8 2.8 1.7 4.4 3.9 4.4 7.6.1 4.2-3.3 7.6-9.2 7.6zm9.6-28.7c-2 0-3.2-.5-4.8-1.5-17.8-10.8-45.1-16.6-71.4-16.6-13 0-25.6 1.5-36.5 4.5-1.5.4-3.2 1-5.1 1-5.2 0-9-4.1-9-9.2 0-5.2 3-8.2 7.3-9.4 12.5-3.7 27.3-5.5 43.4-5.5 28.8 0 59 6.6 81.2 19.3 3.5 2 5.4 4.7 5.4 8.9.1 5.2-4 8.5-10.5 8.5z" fill="#fff"/>
+    </svg>`,
+    line: "<em>streaming</em> sem limites",
   },
 ];
 
@@ -955,24 +970,22 @@ var VERIFIED_SVG = '<span class="verified-badge"><svg viewBox="0 0 22 22" fill="
   }).join('');
 })();
 
-/* ── ADS slider ── */
+/* ── Parceiros strip ── */
 (function(){
-  var slider = document.getElementById('ads-slider');
-  if(!slider) return;
-  var doubled = ADS.concat(ADS);
-  slider.innerHTML = doubled.map(function(ad, i){
-    var delay = ((i % ADS.length) * 0.7) + 's';
-    return '<div class="ad-card" style="--dl:'+delay+'">'+
-      '<div class="ad-top-line" style="background:'+ad.color+';--dl:'+delay+'"></div>'+
-      '<div class="ad-inner-beam" style="background:'+ad.beam+';--dl:'+delay+'"></div>'+
-      '<div class="ad-card-top">'+
-        '<div class="ad-logo" style="background:'+ad.logoBg+';color:'+ad.logoColor+';font-family:Georgia,serif;border:1px solid '+ad.color+'22;">'+ad.logoChar+'</div>'+
-        '<span class="ad-brand">'+ad.brand+'</span>'+
+  var strip = document.getElementById('parceiros-strip');
+  if(!strip) return;
+  // duplica para loop infinito
+  var doubled = PARCEIROS.concat(PARCEIROS);
+  strip.innerHTML = doubled.map(function(p){
+    var tag = p.href && p.href !== '#' ? 'a href="'+p.href+'" target="_blank"' : 'div';
+    var close = p.href && p.href !== '#' ? 'a' : 'div';
+    return '<'+tag+' class="parc-card">'+
+      '<div class="parc-logo">'+p.logo+'</div>'+
+      '<div class="parc-body">'+
+        '<span class="parc-brand">'+p.tag+'</span>'+
+        '<span class="parc-line '+p.color+'">'+p.line+'</span>'+
       '</div>'+
-      '<div class="ad-headline">'+ad.headline+'</div>'+
-      '<div class="ad-sub">'+ad.sub+'</div>'+
-      '<span class="ad-badge">patrocinado</span>'+
-    '</div>';
+    '</'+close+'>';
   }).join('');
 })();
 
